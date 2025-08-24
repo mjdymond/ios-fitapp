@@ -1,0 +1,576 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1A2B3C4D5E6F7890 /* FitAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F7891 /* FitAppApp.swift */; };
+		1A2B3C4D5E6F7892 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F7893 /* ContentView.swift */; };
+		1A2B3C4D5E6F7894 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F7895 /* Assets.xcassets */; };
+		1A2B3C4D5E6F7896 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F7897 /* Preview Assets.xcassets */; };
+		1A2B3C4D5E6F7898 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F7899 /* PersistenceController.swift */; };
+		1A2B3C4D5E6F789A /* FitAppDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F789B /* FitAppDataModel.xcdatamodeld */; };
+		1A2B3C4D5E6F789D /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F789E /* DashboardView.swift */; };
+		1A2B3C4D5E6F789F /* WorkoutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78A0 /* WorkoutsView.swift */; };
+		1A2B3C4D5E6F78A1 /* WeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78A2 /* WeightView.swift */; };
+		1A2B3C4D5E6F78A3 /* MealsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78A4 /* MealsView.swift */; };
+		1A2B3C4D5E6F78A5 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78A6 /* ProfileView.swift */; };
+		1A2B3C4D5E6F78A7 /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78A8 /* HealthKitService.swift */; };
+		1A2B3C4D5E6F78A9 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78AA /* User+CoreDataClass.swift */; };
+		1A2B3C4D5E6F78AB /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78AC /* User+CoreDataProperties.swift */; };
+		1A2B3C4D5E6F78AD /* Workout+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78AE /* Workout+CoreDataClass.swift */; };
+		1A2B3C4D5E6F78AF /* Workout+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78B0 /* Workout+CoreDataProperties.swift */; };
+		1A2B3C4D5E6F78B1 /* Exercise+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78B2 /* Exercise+CoreDataClass.swift */; };
+		1A2B3C4D5E6F78B3 /* Exercise+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78B4 /* Exercise+CoreDataProperties.swift */; };
+		1A2B3C4D5E6F78B5 /* ExerciseSet+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78B6 /* ExerciseSet+CoreDataClass.swift */; };
+		1A2B3C4D5E6F78B7 /* ExerciseSet+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78B8 /* ExerciseSet+CoreDataProperties.swift */; };
+		1A2B3C4D5E6F78B9 /* WeightEntry+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78BA /* WeightEntry+CoreDataClass.swift */; };
+		1A2B3C4D5E6F78BB /* WeightEntry+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78BC /* WeightEntry+CoreDataProperties.swift */; };
+		1A2B3C4D5E6F78BD /* Meal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78BE /* Meal+CoreDataClass.swift */; };
+		1A2B3C4D5E6F78BF /* Meal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78C0 /* Meal+CoreDataProperties.swift */; };
+		1A2B3C4D5E6F78C1 /* Food+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78C2 /* Food+CoreDataClass.swift */; };
+		1A2B3C4D5E6F78C3 /* Food+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78C4 /* Food+CoreDataProperties.swift */; };
+		1A2B3C4D5E6F78C5 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78C6 /* HealthKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1A2B3C4D5E6F7891 /* FitAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitAppApp.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F7893 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F7895 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1A2B3C4D5E6F7897 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1A2B3C4D5E6F7899 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F789C /* FitAppDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FitAppDataModel.xcdatamodel; sourceTree = "<group>"; };
+		1A2B3C4D5E6F789E /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78A0 /* WorkoutsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsView.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78A2 /* WeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightView.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78A4 /* MealsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsView.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78A6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78A8 /* HealthKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitService.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78AA /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78AC /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78AE /* Workout+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78B0 /* Workout+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78B2 /* Exercise+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78B4 /* Exercise+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78B6 /* ExerciseSet+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseSet+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78B8 /* ExerciseSet+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExerciseSet+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78BA /* WeightEntry+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeightEntry+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78BC /* WeightEntry+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeightEntry+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78BE /* Meal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Meal+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78C0 /* Meal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Meal+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78C2 /* Food+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78C4 /* Food+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78C6 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		1A2B3C4D5E6F78C7 /* FitApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A2B3C4D5E6F78C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78C9 /* FitApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitApp.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1A2B3C4D5E6F78CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A2B3C4D5E6F78C5 /* HealthKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1A2B3C4D5E6F78CB = {
+			isa = PBXGroup;
+			children = (
+				1A2B3C4D5E6F78CC /* FitApp */,
+				1A2B3C4D5E6F78CD /* Products */,
+				1A2B3C4D5E6F78CE /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		1A2B3C4D5E6F78CC /* FitApp */ = {
+			isa = PBXGroup;
+			children = (
+				1A2B3C4D5E6F78C8 /* Info.plist */,
+				1A2B3C4D5E6F78C9 /* FitApp.entitlements */,
+				1A2B3C4D5E6F78CF /* App */,
+				1A2B3C4D5E6F78D0 /* Core */,
+				1A2B3C4D5E6F78D1 /* Features */,
+				1A2B3C4D5E6F78D2 /* Resources */,
+				1A2B3C4D5E6F78D3 /* Preview Content */,
+			);
+			path = FitApp;
+			sourceTree = "<group>";
+		};
+		1A2B3C4D5E6F78CD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1A2B3C4D5E6F78C7 /* FitApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1A2B3C4D5E6F78CE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1A2B3C4D5E6F78C6 /* HealthKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1A2B3C4D5E6F78CF /* App */ = {
+			isa = PBXGroup;
+			children = (
+				1A2B3C4D5E6F7891 /* FitAppApp.swift */,
+				1A2B3C4D5E6F7893 /* ContentView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		1A2B3C4D5E6F78D0 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				1A2B3C4D5E6F78D4 /* Data */,
+				1A2B3C4D5E6F78D5 /* Services */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		1A2B3C4D5E6F78D1 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				1A2B3C4D5E6F78D6 /* Dashboard */,
+				1A2B3C4D5E6F78D7 /* Workouts */,
+				1A2B3C4D5E6F78D8 /* Weight */,
+				1A2B3C4D5E6F78D9 /* Meals */,
+				1A2B3C4D5E6F78DA /* Profile */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		1A2B3C4D5E6F78D2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1A2B3C4D5E6F7895 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		1A2B3C4D5E6F78D3 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				1A2B3C4D5E6F7897 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1A2B3C4D5E6F78D4 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				1A2B3C4D5E6F78DB /* CoreData */,
+				1A2B3C4D5E6F78DC /* Models */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		1A2B3C4D5E6F78D5 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1A2B3C4D5E6F78A8 /* HealthKitService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		1A2B3C4D5E6F78D6 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				1A2B3C4D5E6F789E /* DashboardView.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		1A2B3C4D5E6F78D7 /* Workouts */ = {
+			isa = PBXGroup;
+			children = (
+				1A2B3C4D5E6F78A0 /* WorkoutsView.swift */,
+			);
+			path = Workouts;
+			sourceTree = "<group>";
+		};
+		1A2B3C4D5E6F78D8 /* Weight */ = {
+			isa = PBXGroup;
+			children = (
+				1A2B3C4D5E6F78A2 /* WeightView.swift */,
+			);
+			path = Weight;
+			sourceTree = "<group>";
+		};
+		1A2B3C4D5E6F78D9 /* Meals */ = {
+			isa = PBXGroup;
+			children = (
+				1A2B3C4D5E6F78A4 /* MealsView.swift */,
+			);
+			path = Meals;
+			sourceTree = "<group>";
+		};
+		1A2B3C4D5E6F78DA /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				1A2B3C4D5E6F78A6 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		1A2B3C4D5E6F78DB /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				1A2B3C4D5E6F7899 /* PersistenceController.swift */,
+				1A2B3C4D5E6F789B /* FitAppDataModel.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		1A2B3C4D5E6F78DC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1A2B3C4D5E6F78AA /* User+CoreDataClass.swift */,
+				1A2B3C4D5E6F78AC /* User+CoreDataProperties.swift */,
+				1A2B3C4D5E6F78AE /* Workout+CoreDataClass.swift */,
+				1A2B3C4D5E6F78B0 /* Workout+CoreDataProperties.swift */,
+				1A2B3C4D5E6F78B2 /* Exercise+CoreDataClass.swift */,
+				1A2B3C4D5E6F78B4 /* Exercise+CoreDataProperties.swift */,
+				1A2B3C4D5E6F78B6 /* ExerciseSet+CoreDataClass.swift */,
+				1A2B3C4D5E6F78B8 /* ExerciseSet+CoreDataProperties.swift */,
+				1A2B3C4D5E6F78BA /* WeightEntry+CoreDataClass.swift */,
+				1A2B3C4D5E6F78BC /* WeightEntry+CoreDataProperties.swift */,
+				1A2B3C4D5E6F78BE /* Meal+CoreDataClass.swift */,
+				1A2B3C4D5E6F78C0 /* Meal+CoreDataProperties.swift */,
+				1A2B3C4D5E6F78C2 /* Food+CoreDataClass.swift */,
+				1A2B3C4D5E6F78C4 /* Food+CoreDataProperties.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1A2B3C4D5E6F78DD /* FitApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1A2B3C4D5E6F78DE /* Build configuration list for PBXNativeTarget "FitApp" */;
+			buildPhases = (
+				1A2B3C4D5E6F78DF /* Sources */,
+				1A2B3C4D5E6F78CA /* Frameworks */,
+				1A2B3C4D5E6F78E0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FitApp;
+			productName = FitApp;
+			productReference = 1A2B3C4D5E6F78C7 /* FitApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1A2B3C4D5E6F78E1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					1A2B3C4D5E6F78DD = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 1A2B3C4D5E6F78E2 /* Build configuration list for PBXProject "FitApp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1A2B3C4D5E6F78CB;
+			productRefGroup = 1A2B3C4D5E6F78CD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1A2B3C4D5E6F78DD /* FitApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1A2B3C4D5E6F78E0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A2B3C4D5E6F7896 /* Preview Assets.xcassets in Resources */,
+				1A2B3C4D5E6F7894 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1A2B3C4D5E6F78DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A2B3C4D5E6F789A /* FitAppDataModel.xcdatamodeld in Sources */,
+				1A2B3C4D5E6F7892 /* ContentView.swift in Sources */,
+				1A2B3C4D5E6F7890 /* FitAppApp.swift in Sources */,
+				1A2B3C4D5E6F7898 /* PersistenceController.swift in Sources */,
+				1A2B3C4D5E6F789D /* DashboardView.swift in Sources */,
+				1A2B3C4D5E6F789F /* WorkoutsView.swift in Sources */,
+				1A2B3C4D5E6F78A1 /* WeightView.swift in Sources */,
+				1A2B3C4D5E6F78A3 /* MealsView.swift in Sources */,
+				1A2B3C4D5E6F78A5 /* ProfileView.swift in Sources */,
+				1A2B3C4D5E6F78A7 /* HealthKitService.swift in Sources */,
+				1A2B3C4D5E6F78A9 /* User+CoreDataClass.swift in Sources */,
+				1A2B3C4D5E6F78AB /* User+CoreDataProperties.swift in Sources */,
+				1A2B3C4D5E6F78AD /* Workout+CoreDataClass.swift in Sources */,
+				1A2B3C4D5E6F78AF /* Workout+CoreDataProperties.swift in Sources */,
+				1A2B3C4D5E6F78B1 /* Exercise+CoreDataClass.swift in Sources */,
+				1A2B3C4D5E6F78B3 /* Exercise+CoreDataProperties.swift in Sources */,
+				1A2B3C4D5E6F78B5 /* ExerciseSet+CoreDataClass.swift in Sources */,
+				1A2B3C4D5E6F78B7 /* ExerciseSet+CoreDataProperties.swift in Sources */,
+				1A2B3C4D5E6F78B9 /* WeightEntry+CoreDataClass.swift in Sources */,
+				1A2B3C4D5E6F78BB /* WeightEntry+CoreDataProperties.swift in Sources */,
+				1A2B3C4D5E6F78BD /* Meal+CoreDataClass.swift in Sources */,
+				1A2B3C4D5E6F78BF /* Meal+CoreDataProperties.swift in Sources */,
+				1A2B3C4D5E6F78C1 /* Food+CoreDataClass.swift in Sources */,
+				1A2B3C4D5E6F78C3 /* Food+CoreDataProperties.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1A2B3C4D5E6F78E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1A2B3C4D5E6F78E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1A2B3C4D5E6F78E5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FitApp/FitApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FitApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 5JNT79D394;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = FitApp/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.fitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1A2B3C4D5E6F78E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FitApp/FitApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FitApp/Preview Content\"";
+				DEVELOPMENT_TEAM = 5JNT79D394;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = FitApp/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.fitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1A2B3C4D5E6F78DE /* Build configuration list for PBXNativeTarget "FitApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A2B3C4D5E6F78E5 /* Debug */,
+				1A2B3C4D5E6F78E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1A2B3C4D5E6F78E2 /* Build configuration list for PBXProject "FitApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A2B3C4D5E6F78E3 /* Debug */,
+				1A2B3C4D5E6F78E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1A2B3C4D5E6F789B /* FitAppDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1A2B3C4D5E6F789C /* FitAppDataModel.xcdatamodel */,
+			);
+			currentVersion = 1A2B3C4D5E6F789C /* FitAppDataModel.xcdatamodel */;
+			path = FitAppDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 1A2B3C4D5E6F78E1 /* Project object */;
+}
