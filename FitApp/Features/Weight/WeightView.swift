@@ -334,6 +334,12 @@ struct NewWeightEntryView: View {
         
         do {
             try viewContext.save()
+            
+            // Trigger gamification updates
+            let gamificationService = GamificationService(context: viewContext)
+            gamificationService.updateWeightTrackingStreak()
+            gamificationService.awardPoints(15, source: "weight_tracking", description: "Weight entry logged")
+            
             dismiss()
         } catch {
             print("Failed to save weight entry: \(error)")

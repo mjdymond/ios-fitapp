@@ -282,12 +282,19 @@ struct ContentView: View {
                     }
                     .tag(3)
                 
+                GamificationView(context: viewContext)
+                    .tabItem {
+                        Image(systemName: "trophy.fill")
+                        Text("Achievements")
+                    }
+                    .tag(4)
+                
                 ProfileView()
                     .tabItem {
                         Image(systemName: "person.fill")
                         Text("Profile")
                     }
-                    .tag(4)
+                    .tag(5)
             }
             .accentColor(.blue)
             .onAppear {

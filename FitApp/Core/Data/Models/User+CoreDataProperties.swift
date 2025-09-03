@@ -16,9 +16,20 @@ extension User {
     @NSManaged public var id: UUID?
     @NSManaged public var name: String?
     @NSManaged public var targetWeight: Double
+    
+    // Gamification properties
+    @NSManaged public var totalPoints: Int32
+    @NSManaged public var level: Int32
+    @NSManaged public var experience: Int32
+    
+    // Relationships
     @NSManaged public var meals: NSSet?
     @NSManaged public var weightEntries: NSSet?
     @NSManaged public var workouts: NSSet?
+    @NSManaged public var streaks: NSSet?
+    @NSManaged public var challenges: NSSet?
+    @NSManaged public var achievements: NSSet?
+    @NSManaged public var pointTransactions: NSSet?
 
 }
 
@@ -70,6 +81,74 @@ extension User {
 
     @objc(removeWorkouts:)
     @NSManaged public func removeFromWorkouts(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for streaks
+extension User {
+
+    @objc(addStreaksObject:)
+    @NSManaged public func addToStreaks(_ value: Streak)
+
+    @objc(removeStreaksObject:)
+    @NSManaged public func removeFromStreaks(_ value: Streak)
+
+    @objc(addStreaks:)
+    @NSManaged public func addToStreaks(_ values: NSSet)
+
+    @objc(removeStreaks:)
+    @NSManaged public func removeFromStreaks(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for challenges
+extension User {
+
+    @objc(addChallengesObject:)
+    @NSManaged public func addToChallenges(_ value: Challenge)
+
+    @objc(removeChallengesObject:)
+    @NSManaged public func removeFromChallenges(_ value: Challenge)
+
+    @objc(addChallenges:)
+    @NSManaged public func addToChallenges(_ values: NSSet)
+
+    @objc(removeChallenges:)
+    @NSManaged public func removeFromChallenges(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for achievements
+extension User {
+
+    @objc(addAchievementsObject:)
+    @NSManaged public func addToAchievements(_ value: Achievement)
+
+    @objc(removeAchievementsObject:)
+    @NSManaged public func removeFromAchievements(_ value: Achievement)
+
+    @objc(addAchievements:)
+    @NSManaged public func addToAchievements(_ values: NSSet)
+
+    @objc(removeAchievements:)
+    @NSManaged public func removeFromAchievements(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for pointTransactions
+extension User {
+
+    @objc(addPointTransactionsObject:)
+    @NSManaged public func addToPointTransactions(_ value: PointTransaction)
+
+    @objc(removePointTransactionsObject:)
+    @NSManaged public func removeFromPointTransactions(_ value: PointTransaction)
+
+    @objc(addPointTransactions:)
+    @NSManaged public func addToPointTransactions(_ values: NSSet)
+
+    @objc(removePointTransactions:)
+    @NSManaged public func removeFromPointTransactions(_ values: NSSet)
 
 }
 

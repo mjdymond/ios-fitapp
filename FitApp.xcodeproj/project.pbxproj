@@ -19,6 +19,8 @@
 		1A2B3C4D5E6F78A3 /* MealsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78A4 /* MealsView.swift */; };
 		1A2B3C4D5E6F78A5 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78A6 /* ProfileView.swift */; };
 		1A2B3C4D5E6F78A7 /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78A8 /* HealthKitService.swift */; };
+		053AE50EF32947329CFED865A41CEC8C /* GamificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67013A44C1644D538CF1B7046AEF63FB /* GamificationService.swift */; };
+		612672F7662040488761344C6DAB2315 /* GamificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296AC70BF8BD459C8616F231C355BCED /* GamificationView.swift */; };
 		1A2B3C4D5E6F78A9 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78AA /* User+CoreDataClass.swift */; };
 		1A2B3C4D5E6F78AB /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78AC /* User+CoreDataProperties.swift */; };
 		1A2B3C4D5E6F78AD /* Workout+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78AE /* Workout+CoreDataClass.swift */; };
@@ -33,6 +35,14 @@
 		1A2B3C4D5E6F78BF /* Meal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78C0 /* Meal+CoreDataProperties.swift */; };
 		1A2B3C4D5E6F78C1 /* Food+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78C2 /* Food+CoreDataClass.swift */; };
 		1A2B3C4D5E6F78C3 /* Food+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78C4 /* Food+CoreDataProperties.swift */; };
+		D644C4AB04AE4F5ABF411AA3558A7F12 /* Streak+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDFD1F00DA745CD98375DA043F56FFE /* Streak+CoreDataClass.swift */; };
+		755AAAC429E6476098D1656F78D89AEE /* Streak+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8045F3DA5440C3B0E0BB1F9BB919AE /* Streak+CoreDataProperties.swift */; };
+		E4F2CBD3AB304139A27D571175BD5423 /* Challenge+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE110374ABE44B48A8A3B551BB9B9DE /* Challenge+CoreDataClass.swift */; };
+		A77C423EA31C44E3B7A1C2207BA7FA8C /* Challenge+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A13883540874C8FB4D6615D1A8D986F /* Challenge+CoreDataProperties.swift */; };
+		91BBD1EC007E48A791AFCF4BD7897C01 /* Achievement+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893F0D3F8867430687CC4A51EECAE2B3 /* Achievement+CoreDataClass.swift */; };
+		FF547B6918FC4B15A52F22152C132F21 /* Achievement+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155A2C977292485EACE8A182CADD81A9 /* Achievement+CoreDataProperties.swift */; };
+		C8EA18C3ED0E4A90B472A7BACBCBBB30 /* PointTransaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EA154CC4144AE383BDC5E578DBC309 /* PointTransaction+CoreDataClass.swift */; };
+		0885FF226F124CEA90D29D312D65199A /* PointTransaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E144A2265ECA4CF397C8D1588D5C9FD1 /* PointTransaction+CoreDataProperties.swift */; };
 		1A2B3C4D5E6F78C5 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78C6 /* HealthKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +59,8 @@
 		1A2B3C4D5E6F78A4 /* MealsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsView.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F78A6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F78A8 /* HealthKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitService.swift; sourceTree = "<group>"; };
+		67013A44C1644D538CF1B7046AEF63FB /* GamificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamificationService.swift; sourceTree = "<group>"; };
+		296AC70BF8BD459C8616F231C355BCED /* GamificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamificationView.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F78AA /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1A2B3C4D5E6F78AC /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1A2B3C4D5E6F78AE /* Workout+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -63,6 +75,14 @@
 		1A2B3C4D5E6F78C0 /* Meal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Meal+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1A2B3C4D5E6F78C2 /* Food+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1A2B3C4D5E6F78C4 /* Food+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FBDFD1F00DA745CD98375DA043F56FFE /* Streak+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Streak+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0D8045F3DA5440C3B0E0BB1F9BB919AE /* Streak+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Streak+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0EE110374ABE44B48A8A3B551BB9B9DE /* Challenge+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Challenge+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5A13883540874C8FB4D6615D1A8D986F /* Challenge+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Challenge+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		893F0D3F8867430687CC4A51EECAE2B3 /* Achievement+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Achievement+CoreDataClass.swift"; sourceTree = "<group>"; };
+		155A2C977292485EACE8A182CADD81A9 /* Achievement+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Achievement+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		35EA154CC4144AE383BDC5E578DBC309 /* PointTransaction+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PointTransaction+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E144A2265ECA4CF397C8D1588D5C9FD1 /* PointTransaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PointTransaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1A2B3C4D5E6F78C6 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		1A2B3C4D5E6F78C7 /* FitApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A2B3C4D5E6F78C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -146,6 +166,7 @@
 				1A2B3C4D5E6F78D8 /* Weight */,
 				1A2B3C4D5E6F78D9 /* Meals */,
 				1A2B3C4D5E6F78DA /* Profile */,
+				ED4A69932E394132AA61FA42B500EDFD /* Gamification */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -179,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				1A2B3C4D5E6F78A8 /* HealthKitService.swift */,
+				67013A44C1644D538CF1B7046AEF63FB /* GamificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -223,6 +245,14 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		ED4A69932E394132AA61FA42B500EDFD /* Gamification */ = {
+			isa = PBXGroup;
+			children = (
+				296AC70BF8BD459C8616F231C355BCED /* GamificationView.swift */,
+			);
+			path = Gamification;
+			sourceTree = "<group>";
+		};
 		1A2B3C4D5E6F78DB /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,6 +279,14 @@
 				1A2B3C4D5E6F78C0 /* Meal+CoreDataProperties.swift */,
 				1A2B3C4D5E6F78C2 /* Food+CoreDataClass.swift */,
 				1A2B3C4D5E6F78C4 /* Food+CoreDataProperties.swift */,
+				FBDFD1F00DA745CD98375DA043F56FFE /* Streak+CoreDataClass.swift */,
+				0D8045F3DA5440C3B0E0BB1F9BB919AE /* Streak+CoreDataProperties.swift */,
+				0EE110374ABE44B48A8A3B551BB9B9DE /* Challenge+CoreDataClass.swift */,
+				5A13883540874C8FB4D6615D1A8D986F /* Challenge+CoreDataProperties.swift */,
+				893F0D3F8867430687CC4A51EECAE2B3 /* Achievement+CoreDataClass.swift */,
+				155A2C977292485EACE8A182CADD81A9 /* Achievement+CoreDataProperties.swift */,
+				35EA154CC4144AE383BDC5E578DBC309 /* PointTransaction+CoreDataClass.swift */,
+				E144A2265ECA4CF397C8D1588D5C9FD1 /* PointTransaction+CoreDataProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -333,6 +371,8 @@
 				1A2B3C4D5E6F78A3 /* MealsView.swift in Sources */,
 				1A2B3C4D5E6F78A5 /* ProfileView.swift in Sources */,
 				1A2B3C4D5E6F78A7 /* HealthKitService.swift in Sources */,
+				053AE50EF32947329CFED865A41CEC8C /* GamificationService.swift in Sources */,
+				612672F7662040488761344C6DAB2315 /* GamificationView.swift in Sources */,
 				1A2B3C4D5E6F78A9 /* User+CoreDataClass.swift in Sources */,
 				1A2B3C4D5E6F78AB /* User+CoreDataProperties.swift in Sources */,
 				1A2B3C4D5E6F78AD /* Workout+CoreDataClass.swift in Sources */,
@@ -347,6 +387,14 @@
 				1A2B3C4D5E6F78BF /* Meal+CoreDataProperties.swift in Sources */,
 				1A2B3C4D5E6F78C1 /* Food+CoreDataClass.swift in Sources */,
 				1A2B3C4D5E6F78C3 /* Food+CoreDataProperties.swift in Sources */,
+				D644C4AB04AE4F5ABF411AA3558A7F12 /* Streak+CoreDataClass.swift in Sources */,
+				755AAAC429E6476098D1656F78D89AEE /* Streak+CoreDataProperties.swift in Sources */,
+				E4F2CBD3AB304139A27D571175BD5423 /* Challenge+CoreDataClass.swift in Sources */,
+				A77C423EA31C44E3B7A1C2207BA7FA8C /* Challenge+CoreDataProperties.swift in Sources */,
+				91BBD1EC007E48A791AFCF4BD7897C01 /* Achievement+CoreDataClass.swift in Sources */,
+				FF547B6918FC4B15A52F22152C132F21 /* Achievement+CoreDataProperties.swift in Sources */,
+				C8EA18C3ED0E4A90B472A7BACBCBBB30 /* PointTransaction+CoreDataClass.swift in Sources */,
+				0885FF226F124CEA90D29D312D65199A /* PointTransaction+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

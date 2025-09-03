@@ -181,6 +181,13 @@ struct NewWorkoutView: View {
         
         do {
             try viewContext.save()
+            
+            // Trigger gamification updates
+            let gamificationService = GamificationService(context: viewContext)
+            gamificationService.updateWorkoutStreak()
+            gamificationService.updateChallengeProgress("workout", value: 1.0)
+            gamificationService.awardPoints(25, source: "workout", description: "Completed workout")
+            
             dismiss()
         } catch {
             print("Failed to save workout: \(error)")
