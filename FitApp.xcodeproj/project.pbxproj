@@ -16,6 +16,7 @@
 		1A2B3C4D5E6F789D /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F789E /* DashboardView.swift */; };
 		1A2B3C4D5E6F789F /* WorkoutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78A0 /* WorkoutsView.swift */; };
 		1A2B3C4D5E6F78A1 /* WeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78A2 /* WeightView.swift */; };
+		1A2B3C4D5E6F78F1 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78F2 /* ProgressView.swift */; };
 		1A2B3C4D5E6F78A3 /* MealsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78A4 /* MealsView.swift */; };
 		1A2B3C4D5E6F78A5 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78A6 /* ProfileView.swift */; };
 		1A2B3C4D5E6F78A7 /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F78A8 /* HealthKitService.swift */; };
@@ -56,6 +57,7 @@
 		1A2B3C4D5E6F789E /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F78A0 /* WorkoutsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsView.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F78A2 /* WeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightView.swift; sourceTree = "<group>"; };
+		1A2B3C4D5E6F78F2 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F78A4 /* MealsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsView.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F78A6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F78A8 /* HealthKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitService.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				1A2B3C4D5E6F78D6 /* Dashboard */,
 				1A2B3C4D5E6F78D7 /* Workouts */,
 				1A2B3C4D5E6F78D8 /* Weight */,
+				1A2B3C4D5E6F78F3 /* Progress */,
 				1A2B3C4D5E6F78D9 /* Meals */,
 				1A2B3C4D5E6F78DA /* Profile */,
 				ED4A69932E394132AA61FA42B500EDFD /* Gamification */,
@@ -227,6 +230,14 @@
 				1A2B3C4D5E6F78A2 /* WeightView.swift */,
 			);
 			path = Weight;
+			sourceTree = "<group>";
+		};
+		1A2B3C4D5E6F78F3 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				1A2B3C4D5E6F78F2 /* ProgressView.swift */,
+			);
+			path = Progress;
 			sourceTree = "<group>";
 		};
 		1A2B3C4D5E6F78D9 /* Meals */ = {
@@ -368,6 +379,7 @@
 				1A2B3C4D5E6F789D /* DashboardView.swift in Sources */,
 				1A2B3C4D5E6F789F /* WorkoutsView.swift in Sources */,
 				1A2B3C4D5E6F78A1 /* WeightView.swift in Sources */,
+				1A2B3C4D5E6F78F1 /* ProgressView.swift in Sources */,
 				1A2B3C4D5E6F78A3 /* MealsView.swift in Sources */,
 				1A2B3C4D5E6F78A5 /* ProfileView.swift in Sources */,
 				1A2B3C4D5E6F78A7 /* HealthKitService.swift in Sources */,

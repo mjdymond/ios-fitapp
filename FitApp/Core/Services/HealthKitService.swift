@@ -56,7 +56,7 @@ class HealthKitService: ObservableObject {
     
     func requestAuthorization() async {
         guard HKHealthStore.isHealthDataAvailable() else {
-            DispatchQueue.main.async {
+            await MainActor.run {
                 self.authorizationError = HealthKitError.notAvailable
             }
             return
@@ -64,12 +64,12 @@ class HealthKitService: ObservableObject {
         
         do {
             try await healthStore.requestAuthorization(toShare: writeTypes, read: readTypes)
-            DispatchQueue.main.async {
+            await MainActor.run {
                 self.isAuthorized = true
                 self.authorizationError = nil
             }
         } catch {
-            DispatchQueue.main.async {
+            await MainActor.run {
                 self.authorizationError = error
                 self.isAuthorized = false
             }
@@ -97,12 +97,12 @@ class HealthKitService: ObservableObject {
         }
         
         let descriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
-        let query = HKSampleQuery(
+        let _ = HKSampleQuery(
             sampleType: weightType,
             predicate: nil,
             limit: 1,
             sortDescriptors: [descriptor]
-        ) { _, samples, error in
+        ) { @Sendable _, samples, error in
             // Handle in completion
         }
         
@@ -112,7 +112,7 @@ class HealthKitService: ObservableObject {
                 predicate: nil,
                 limit: 1,
                 sortDescriptors: [descriptor]
-            ) { _, samples, error in
+            ) { @Sendable _, samples, error in
                 if let error = error {
                     continuation.resume(throwing: error)
                     return
@@ -150,7 +150,7 @@ class HealthKitService: ObservableObject {
                 predicate: predicate,
                 limit: HKObjectQueryNoLimit,
                 sortDescriptors: [descriptor]
-            ) { _, samples, error in
+            ) { @Sendable _, samples, error in
                 if let error = error {
                     continuation.resume(throwing: error)
                     return
@@ -189,7 +189,7 @@ class HealthKitService: ObservableObject {
         duration: TimeInterval,
         totalEnergyBurned: Double? = nil
     ) async throws {
-        var metadata: [String: Any] = [:]
+        let metadata: [String: Any] = [:]
         
         let energyBurned: HKQuantity?
         if let totalEnergyBurned = totalEnergyBurned {

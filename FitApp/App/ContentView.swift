@@ -267,34 +267,34 @@ struct ContentView: View {
                         Text("Workouts")
                     }
                     .tag(2)
-                
-                WeightTrackingView()
+
+                FitnessProgressView()
                     .tabItem {
-                        Image(systemName: "scalemass.fill")
-                        Text("Weight")
+                        Image(systemName: "chart.line.uptrend.xyaxis")
+                        Text("Progress")
                     }
-                    .tag(2)
+                    .tag(3)
                 
                 MealsView()
                     .tabItem {
                         Image(systemName: "fork.knife")
                         Text("Meals")
                     }
-                    .tag(3)
-                
+                    .tag(4)
+
                 GamificationView(context: viewContext)
                     .tabItem {
                         Image(systemName: "trophy.fill")
                         Text("Achievements")
                     }
-                    .tag(4)
-                
+                    .tag(5)
+
                 ProfileView()
                     .tabItem {
                         Image(systemName: "person.fill")
                         Text("Profile")
                     }
-                    .tag(5)
+                    .tag(6)
             }
             .accentColor(.blue)
             .onAppear {
