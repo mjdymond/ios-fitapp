@@ -257,46 +257,49 @@ struct ContentView: View {
                 }
                 .tabItem {
                     Image(systemName: "house.fill")
-                    Text("Dashboard")
+                    Text("Home")
                 }
                 .tag(1)
-                
-                WorkoutsView()
-                    .tabItem {
-                        Image(systemName: "dumbbell.fill")
-                        Text("Workouts")
-                    }
-                    .tag(2)
 
                 FitnessProgressView()
                     .tabItem {
-                        Image(systemName: "chart.line.uptrend.xyaxis")
+                        Image(systemName: "chart.bar.fill")
                         Text("Progress")
                     }
-                    .tag(3)
+                    .tag(2)
                 
-                MealsView()
-                    .tabItem {
-                        Image(systemName: "fork.knife")
-                        Text("Meals")
-                    }
-                    .tag(4)
-
-                GamificationView(context: viewContext)
-                    .tabItem {
-                        Image(systemName: "trophy.fill")
-                        Text("Achievements")
-                    }
-                    .tag(5)
-
                 ProfileView()
                     .tabItem {
-                        Image(systemName: "person.fill")
-                        Text("Profile")
+                        Image(systemName: "gearshape.fill")
+                        Text("Settings")
                     }
-                    .tag(6)
+                    .tag(3)
             }
-            .accentColor(.blue)
+            .accentColor(.black)
+            .onAppear {
+                // Customize tab bar appearance
+                let tabBarAppearance = UITabBarAppearance()
+                tabBarAppearance.configureWithOpaqueBackground()
+                tabBarAppearance.backgroundColor = UIColor.white
+                tabBarAppearance.shadowColor = UIColor(red: 229/255, green: 229/255, blue: 234/255, alpha: 1)
+                
+                // Configure selected tab appearance
+                tabBarAppearance.stackedLayoutAppearance.selected.iconColor = UIColor.black
+                tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [
+                    .foregroundColor: UIColor.black,
+                    .font: UIFont.systemFont(ofSize: 10, weight: .semibold)
+                ]
+                
+                // Configure normal tab appearance
+                tabBarAppearance.stackedLayoutAppearance.normal.iconColor = UIColor(red: 142/255, green: 142/255, blue: 147/255, alpha: 1)
+                tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes = [
+                    .foregroundColor: UIColor(red: 142/255, green: 142/255, blue: 147/255, alpha: 1),
+                    .font: UIFont.systemFont(ofSize: 10, weight: .regular)
+                ]
+                
+                UITabBar.appearance().standardAppearance = tabBarAppearance
+                UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+            }
             .onAppear {
                 print("🏠 Main app appeared (hasCompletedOnboarding = \(hasCompletedOnboarding))")
                 checkOnboardingStatus()

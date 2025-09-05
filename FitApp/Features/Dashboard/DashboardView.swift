@@ -4,6 +4,7 @@ import Foundation
 
 struct DashboardView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Meal.date, ascending: false)],
         predicate: NSPredicate(format: "date >= %@", Calendar.current.startOfDay(for: Date()) as CVarArg),
@@ -16,144 +17,67 @@ struct DashboardView: View {
     private var users: FetchedResults<User>
     
     @State private var showingFoodScanner = false
-    @State private var currentMealIndex = 0
+    @State private var selectedDate = Date()
+    @State private var currentPageIndex = 0
     
-    // Sample meals for demo - replace with actual data
-    let sampleMeals = MealData.sampleMeals
+    // Sample data - replace with real data
+    private let currentStreak = 0
     
-    var currentUser: User? {
-        users.first
-    }
+    // Page 1 Data - Calories
+    private let caloriesEaten = 0
+    private let caloriesGoal = 2662
+    private let caloriesBurned = 200
+    private let caloriesNet = 115
+    private let proteinEaten = 0
+    private let proteinGoal = 208
+    private let carbsEaten = 0
+    private let carbsGoal = 290
+    private let fatEaten = 0
+    private let fatGoal = 74
     
-    var dailyCalorieGoal: Double {
-        currentUser?.targetWeight ?? 2000 // Default to 2000 if no user data
-    }
+    // Page 2 Data - Micronutrients
+    private let fiberEaten = 0
+    private let fiberGoal = 38
+    private let sugarEaten = 0
+    private let sugarGoal = 88
+    private let sodiumEaten = 0
+    private let sodiumGoal = 2300
     
-    var consumedCalories: Double {
-        sampleMeals.prefix(currentMealIndex + 1).reduce(0) { $0 + $1.nutrition.calories }
-    }
-    
-    var calorieProgress: Double {
-        min(consumedCalories / dailyCalorieGoal, 1.0)
-    }
-    
-    var currentMeal: MealData {
-        sampleMeals[currentMealIndex]
-    }
+    // Page 3 Data - Activity
+    private let stepsToday = 2023
+    private let stepsGoal = 10000
+    private let caloriesBurnedActivity = 115
+    private let waterOz = 0
+    private let waterCups = 0
     
     var body: some View {
         ZStack {
-            Color(.systemBackground)
+            Color(hex: "F2F2F7")
                 .ignoresSafeArea()
             
+            ScrollView {
             VStack(spacing: 0) {
-                // Header with time and navigation
-                HStack {
-                    NavigationLink(destination: PlanSummaryView()) {
-                        Image(systemName: "person.crop.circle.fill")
-                            .font(.title2)
-                            .foregroundColor(.primary)
-                    }
+                    // Header
+                    headerSection
                     
-                    Spacer()
+                    // Week Calendar
+                    weekCalendarSection
                     
-                    Text(Date().formatted(.dateTime.hour().minute()))
-                        .font(.system(size: 18, weight: .medium))
+                    // Swipeable Dashboard Pages
+                    swipeableDashboardSection
                     
-                    Spacer()
+                    // Page Indicator
+                    pageIndicatorSection
                     
-                    Button(action: {}) {
-                        Text("EN")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.primary)
-                    }
-                }
-                .padding(.horizontal)
-                .padding(.top, 8)
-                
-                // Daily Progress Bar
-                VStack(spacing: 8) {
-                    HStack {
-                        Text("Daily Progress")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                        
-                        Spacer()
-                        
-                        Text("\(Int(consumedCalories))/\(Int(dailyCalorieGoal)) cal")
-                            .font(.caption)
-                            .fontWeight(.medium)
-                    }
+                    // Recently Uploaded Section
+                    recentlyUploadedSection
                     
-                    ProgressView(value: calorieProgress)
-                        .progressViewStyle(LinearProgressViewStyle(tint: .orange))
-                        .scaleEffect(x: 1, y: 1.5, anchor: .center)
-                }
-                .padding(.horizontal)
-                .padding(.top, 16)
-                
-                // Main Nutrition Card
-                ScrollView {
-                    VStack(spacing: 32) {
-                        // Gamification Summary
-                        GamificationSummaryCard()
-                            .padding(.horizontal, 20)
-                            .padding(.top, 20)
-                        
-                        NutritionCard(meal: currentMeal)
-                            .padding(.horizontal, 20)
-                            .padding(.top, 10)
-                        
-                        // Meal Navigation
-                        if sampleMeals.count > 1 {
-                            HStack(spacing: 12) {
-                                ForEach(0..<sampleMeals.count, id: \.self) { index in
-                                    Button(action: {
-                                        withAnimation(.easeInOut(duration: 0.3)) {
-                                            currentMealIndex = index
-                                        }
-                                    }) {
-                                        Circle()
-                                            .fill(index == currentMealIndex ? Color.black : Color.gray.opacity(0.3))
-                                            .frame(width: 8, height: 8)
-                                    }
-                                }
-                            }
-                        }
-                        
-                        Spacer(minLength: 120)
-                    }
-                }
-                .refreshable {
-                    // Handle refresh
+                    Spacer(minLength: 100)
                 }
             }
             
-            // Floating Camera Button
-            VStack {
-                Spacer()
-                
-                HStack {
-                    Spacer()
-                    
-                    Button(action: {
-                        showingFoodScanner = true
-                    }) {
-                        ZStack {
-                            Circle()
-                                .fill(Color.black)
-                                .frame(width: 64, height: 64)
-                                .shadow(color: Color.black.opacity(0.3), radius: 8, x: 0, y: 4)
-                            
-                            Image(systemName: "camera.fill")
-                                .font(.system(size: 24, weight: .medium))
-                                .foregroundColor(.white)
-                        }
-                    }
-                    .padding(.trailing, 20)
-                    .padding(.bottom, 20)
-                }
-            }
+            // Floating Add Button
+            floatingAddButton
         }
         .fullScreenCover(isPresented: $showingFoodScanner) {
             FoodScannerView()
@@ -161,296 +85,661 @@ struct DashboardView: View {
     }
 }
 
-
-// MARK: - Data Models
-
-struct MealData {
-    let name: String
-    let imageName: String?
-    let nutrition: NutritionInfo
-    
-    static let sampleMeals = [
-        MealData(
-            name: "Turkey Sandwich With Potato Chips",
-            imageName: "fork.knife",
-            nutrition: NutritionInfo(calories: 460, protein: 28, carbs: 45, fat: 18)
-        ),
-        MealData(
-            name: "Greek Yogurt with Berries",
-            imageName: "cup.and.saucer.fill",
-            nutrition: NutritionInfo(calories: 150, protein: 15, carbs: 20, fat: 3)
-        ),
-        MealData(
-            name: "Grilled Chicken Salad",
-            imageName: "leaf.fill",
-            nutrition: NutritionInfo(calories: 320, protein: 35, carbs: 12, fat: 15)
-        )
-    ]
-}
-
-struct NutritionInfo {
-    let calories: Double
-    let protein: Double
-    let carbs: Double
-    let fat: Double
-}
-
-// MARK: - Nutrition Card Component
-
-struct NutritionCard: View {
-    let meal: MealData
-    @State private var servingCount: Int = 1
-    
-    var adjustedNutrition: NutritionInfo {
-        NutritionInfo(
-            calories: meal.nutrition.calories * Double(servingCount),
-            protein: meal.nutrition.protein * Double(servingCount),
-            carbs: meal.nutrition.carbs * Double(servingCount),
-            fat: meal.nutrition.fat * Double(servingCount)
-        )
-    }
-    
-    var healthScore: Int {
-        // Simple health score calculation based on macro balance
-        let proteinPercent = (adjustedNutrition.protein * 4) / adjustedNutrition.calories
-        let carbPercent = (adjustedNutrition.carbs * 4) / adjustedNutrition.calories
-        let fatPercent = (adjustedNutrition.fat * 9) / adjustedNutrition.calories
-        
-        // Ideal macro balance: 25-30% protein, 45-65% carbs, 20-35% fat
-        var score = 10
-        
-        if proteinPercent < 0.25 || proteinPercent > 0.35 { score -= 2 }
-        if carbPercent < 0.40 || carbPercent > 0.70 { score -= 2 }
-        if fatPercent < 0.15 || fatPercent > 0.40 { score -= 2 }
-        
-        return max(1, score)
-    }
-    
-    var body: some View {
-        VStack(spacing: 0) {
-            // Meal Image
-            ZStack {
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(LinearGradient(
-                        colors: [Color.orange.opacity(0.3), Color.red.opacity(0.2)],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    ))
-                    .frame(height: 200)
+// MARK: - Header Section
+extension DashboardView {
+    private var headerSection: some View {
+        HStack {
+            // Apple Icon and Title
+            HStack(spacing: 8) {
+                Image(systemName: "apple.logo")
+                    .font(.system(size: 28, weight: .medium))
+                    .foregroundColor(.black)
                 
-                if let imageName = meal.imageName {
-                    Image(systemName: imageName)
-                        .font(.system(size: 60))
-                        .foregroundColor(.white.opacity(0.8))
-                } else {
-                    VStack {
-                        Image(systemName: "photo")
-                            .font(.system(size: 40))
-                            .foregroundColor(.white.opacity(0.6))
-                        Text("Add Photo")
-                            .font(.caption)
-                            .foregroundColor(.white.opacity(0.6))
-                    }
-                }
-            }
-            .overlay(alignment: .topTrailing) {
-                Button(action: {}) {
-                    Image(systemName: "camera.fill")
-                        .font(.system(size: 16))
-                        .foregroundColor(.white)
-                        .padding(8)
-                        .background(Color.black.opacity(0.3))
-                        .clipShape(Circle())
-                }
-                .padding()
+                Text("Cal AI")
+                    .font(.system(size: 28, weight: .bold))
+                    .foregroundColor(.black)
+                    .tracking(-0.3)
             }
             
-            // Meal Info Card
-            VStack(spacing: 20) {
-                // Title and Serving Counter
-                VStack(spacing: 16) {
-                    Text(meal.name)
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .multilineTextAlignment(.center)
-                    
-                    // Serving Counter
-                    HStack(spacing: 16) {
-                        Button(action: {
-                            if servingCount > 1 { servingCount -= 1 }
-                        }) {
-                            Image(systemName: "minus")
-                                .font(.system(size: 18, weight: .bold))
-                                .foregroundColor(.white)
-                                .frame(width: 40, height: 40)
-                                .background(Color.gray.opacity(0.3))
-                                .clipShape(Circle())
-                        }
-                        .disabled(servingCount <= 1)
+                Spacer()
+            
+            // Streak Counter
+            HStack(spacing: 4) {
+                Image(systemName: "flame.fill")
+                    .font(.system(size: 16))
+                    .foregroundColor(Color(hex: "FF8C00"))
+                
+                Text("\(currentStreak)")
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(.black)
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 6)
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 1)
+        }
+        .padding(.horizontal, 20)
+        .padding(.top, 16)
+        .padding(.bottom, 20)
+        .background(Color(hex: "F2F2F7"))
+    }
+}
+
+// MARK: - Week Calendar Section
+extension DashboardView {
+    private var weekCalendarSection: some View {
+        VStack(spacing: 0) {
+            HStack(spacing: 0) {
+                ForEach(weekDays, id: \.date) { dayInfo in
+                    VStack(spacing: 8) {
+                        Text(dayInfo.dayName)
+                            .font(.system(size: 13, weight: .regular))
+                            .foregroundColor(Color(hex: "8E8E93"))
                         
-                        VStack(spacing: 2) {
-                            Text("\(servingCount)")
-                                .font(.title)
-                                .fontWeight(.bold)
-                            Text("serving\(servingCount > 1 ? "s" : "")")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
+                        ZStack {
+                            Circle()
+                                .fill(dayInfo.isSelected ? Color.black : Color.clear)
+                                .frame(width: 44, height: 44)
+                                .overlay(
+                                    Circle()
+                                        .stroke(dayInfo.isToday && !dayInfo.isSelected ? Color.black : Color.clear, lineWidth: 2)
+                                )
+                            
+                            Text("\(dayInfo.dayNumber)")
+                                .font(.system(size: 17, weight: .semibold))
+                                .foregroundColor(dayInfo.isSelected ? .white : (dayInfo.isToday ? .black : Color(hex: "8E8E93")))
                         }
-                        .frame(minWidth: 60)
-                        
-                        Button(action: {
-                            if servingCount < 10 { servingCount += 1 }
-                        }) {
-                            Image(systemName: "plus")
-                                .font(.system(size: 18, weight: .bold))
-                                .foregroundColor(.white)
-                                .frame(width: 40, height: 40)
-                                .background(Color.black)
-                                .clipShape(Circle())
+                        .onTapGesture {
+                            selectedDate = dayInfo.date
                         }
-                        .disabled(servingCount >= 10)
                     }
+                    .frame(maxWidth: .infinity)
                 }
-                
-                // Nutrition Breakdown
-                HStack(spacing: 20) {
-                    NutrientDisplay(
-                        value: Int(adjustedNutrition.calories),
-                        unit: "Cal",
-                        icon: "flame.fill",
-                        color: .orange
-                    )
-                    
-                    NutrientDisplay(
-                        value: Int(adjustedNutrition.protein),
-                        unit: "g",
-                        label: "Protein",
-                        icon: "leaf.fill",
-                        color: .red
-                    )
-                    
-                    NutrientDisplay(
-                        value: Int(adjustedNutrition.carbs),
-                        unit: "g", 
-                        label: "Carbs",
-                        icon: "square.fill",
-                        color: .yellow
-                    )
-                    
-                    NutrientDisplay(
-                        value: Int(adjustedNutrition.fat),
-                        unit: "g",
-                        label: "Fat",
-                        icon: "drop.fill",
-                        color: .purple
-                    )
-                }
-                
-                // Health Score
-                VStack(spacing: 8) {
-                    HStack {
-                        Text("Health Score")
-                            .font(.subheadline)
-                            .fontWeight(.medium)
+            }
+        }
+        .padding(.horizontal, 20)
+        .padding(.bottom, 24)
+    }
+    
+    private var weekDays: [DayInfo] {
+        let calendar = Calendar.current
+        let today = Date()
+        let startOfWeek = calendar.dateInterval(of: .weekOfYear, for: today)?.start ?? today
+        
+        return (0..<7).compactMap { offset in
+            guard let date = calendar.date(byAdding: .day, value: offset, to: startOfWeek) else { return nil }
+            let dayName = DateFormatter().weekdaySymbols[calendar.component(.weekday, from: date) - 1].prefix(3).capitalized
+            let dayNumber = calendar.component(.day, from: date)
+            let isToday = calendar.isDate(date, inSameDayAs: today)
+            let isSelected = calendar.isDate(date, inSameDayAs: selectedDate)
+            
+            return DayInfo(
+                date: date,
+                dayName: String(dayName),
+                dayNumber: dayNumber,
+                isToday: isToday,
+                isSelected: isSelected
+            )
+        }
+    }
+}
+
+// MARK: - Swipeable Dashboard Section
+extension DashboardView {
+    private var swipeableDashboardSection: some View {
+        TabView(selection: $currentPageIndex) {
+            // Page 1: Calories
+            caloriesPageView
+                .tag(0)
+            
+            // Page 2: Micronutrients
+            micronutrientsPageView
+                .tag(1)
+            
+            // Page 3: Activity
+            activityPageView
+                .tag(2)
+        }
+        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+        .frame(height: 400)
+        .padding(.bottom, 24)
+    }
+}
+
+// MARK: - Page 1: Calories View
+extension DashboardView {
+    private var caloriesPageView: some View {
+        VStack(spacing: 24) {
+            // Main Calories Card
+            VStack(spacing: 0) {
+                HStack(alignment: .center) {
+                    // Left Content
+                    VStack(alignment: .leading, spacing: 4) {
+                        HStack(alignment: .bottom, spacing: 0) {
+                            Text("\(caloriesEaten)")
+                                .font(.system(size: 48, weight: .bold))
+                                .foregroundColor(.black)
+                                .tracking(-0.5)
+                            
+                            Text("/\(caloriesGoal)")
+                                .font(.system(size: 20, weight: .regular))
+                                .foregroundColor(Color(hex: "8E8E93"))
+                                .padding(.bottom, 6)
+                        }
                         
-                        Spacer()
-                        
-                        Text("\(healthScore)/10")
-                            .font(.subheadline)
-                            .fontWeight(.bold)
-                            .foregroundColor(healthScore >= 7 ? .green : healthScore >= 4 ? .orange : .red)
-                    }
-                    
-                    ProgressView(value: Double(healthScore), total: 10.0)
-                        .progressViewStyle(LinearProgressViewStyle(tint: healthScore >= 7 ? .green : healthScore >= 4 ? .orange : .red))
-                        .scaleEffect(x: 1, y: 2, anchor: .center)
-                }
-                
-                // Action Buttons
-                HStack(spacing: 12) {
-                    Button(action: {}) {
-                        Text("Fix Results")
-                            .font(.system(size: 16, weight: .medium))
+                        Text("Calories eaten")
+                            .font(.system(size: 17, weight: .regular))
                             .foregroundColor(.black)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 44)
-                            .background(Color.gray.opacity(0.2))
-                            .cornerRadius(22)
+                        
+                        HStack(spacing: 16) {
+                            HStack(spacing: 4) {
+                                Image(systemName: "clock.arrow.circlepath")
+                                    .font(.system(size: 16))
+                                    .foregroundColor(.black)
+                                
+                                Text("+\(caloriesBurned)")
+                                    .font(.system(size: 15, weight: .medium))
+                                    .foregroundColor(.black)
+                            }
+                            
+                            HStack(spacing: 4) {
+                                Image(systemName: "flame.fill")
+                                    .font(.system(size: 16))
+                                    .foregroundColor(Color(hex: "FF8C00"))
+                                
+                                Text("+\(caloriesNet)")
+                                    .font(.system(size: 15, weight: .medium))
+                                    .foregroundColor(Color(hex: "FF8C00"))
+                            }
+                        }
                     }
                     
-                    Button(action: {}) {
-                        Text("Done")
-                            .font(.system(size: 16, weight: .semibold))
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 44)
-                            .background(Color.black)
-                            .cornerRadius(22)
+                    Spacer()
+                    
+                    // Right Content - Progress Ring
+                    ZStack {
+                        // Background ring
+                        Circle()
+                            .stroke(Color(hex: "F2F2F7"), lineWidth: 8)
+                            .frame(width: 120, height: 120)
+                        
+                        // Progress ring (0% since no calories eaten)
+                        Circle()
+                            .trim(from: 0, to: 0)
+                            .stroke(Color.black, style: StrokeStyle(lineWidth: 8, lineCap: .round))
+                            .frame(width: 120, height: 120)
+                            .rotationEffect(.degrees(-90))
+                        
+                        // Center icon
+                        Image(systemName: "flame.fill")
+                            .font(.system(size: 20))
+                            .foregroundColor(.black)
                     }
                 }
             }
             .padding(24)
-            .background(Color(.systemBackground))
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .shadow(color: .black.opacity(0.04), radius: 8, x: 0, y: 2)
+            .padding(.horizontal, 20)
+            
+            // Macros Section
+            HStack(spacing: 12) {
+                // Protein Card
+                macroCard(
+                    value: "\(proteinEaten)/\(proteinGoal)g",
+                    label: "Protein eaten",
+                    icon: "dumbbell.fill",
+                    iconColor: Color(hex: "FF3B30"),
+                    ringColor: Color(hex: "FF3B30"),
+                    progress: 0.0
+                )
+                
+                // Carbs Card
+                macroCard(
+                    value: "\(carbsEaten)/\(carbsGoal)g",
+                    label: "Carbs eaten",
+                    icon: "leaf.fill",
+                    iconColor: Color(hex: "DEB887"),
+                    ringColor: Color(hex: "DEB887"),
+                    progress: 0.0
+                )
+                
+                // Fat Card
+                macroCard(
+                    value: "\(fatEaten)/\(fatGoal)g",
+                    label: "Fat eaten",
+                    icon: "drop.fill",
+                    iconColor: Color(hex: "007AFF"),
+                    ringColor: Color(hex: "007AFF"),
+                    progress: 0.0
+                )
+            }
+            .padding(.horizontal, 20)
         }
-        .background(Color(.systemBackground))
-        .cornerRadius(20)
-        .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 5)
-    }
-}
-
-struct NutrientDisplay: View {
-    let value: Int
-    let unit: String
-    let label: String?
-    let icon: String
-    let color: Color
-    
-    init(value: Int, unit: String, label: String? = nil, icon: String, color: Color) {
-        self.value = value
-        self.unit = unit
-        self.label = label
-        self.icon = icon
-        self.color = color
     }
     
-    var body: some View {
-        VStack(spacing: 4) {
-            Image(systemName: icon)
-                .font(.system(size: 16))
-                .foregroundColor(color)
+    private func macroCard(value: String, label: String, icon: String, iconColor: Color, ringColor: Color, progress: Double) -> some View {
+        VStack(spacing: 16) {
+            Text(value)
+                .font(.system(size: 24, weight: .semibold))
+                .foregroundColor(.black)
             
-            Text("\(value)")
-                .font(.system(size: 18, weight: .bold))
+            Text(label)
+                .font(.system(size: 15, weight: .regular))
+                .foregroundColor(Color(hex: "8E8E93"))
+                .multilineTextAlignment(.center)
             
-            Text(unit)
-                .font(.system(size: 10, weight: .medium))
-                .foregroundColor(.secondary)
-            
-            if let label = label {
-                Text(label)
-                    .font(.system(size: 10))
-                    .foregroundColor(.secondary)
+            ZStack {
+                // Background ring
+                Circle()
+                    .stroke(Color(hex: "F2F2F7"), lineWidth: 6)
+                    .frame(width: 60, height: 60)
+                
+                // Progress ring
+                Circle()
+                    .trim(from: 0, to: progress)
+                    .stroke(ringColor, style: StrokeStyle(lineWidth: 6, lineCap: .round))
+                    .frame(width: 60, height: 60)
+                    .rotationEffect(.degrees(-90))
+                
+                // Center icon
+                Image(systemName: icon)
+                    .font(.system(size: 20))
+                    .foregroundColor(iconColor)
             }
         }
         .frame(maxWidth: .infinity)
+        .padding(20)
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .shadow(color: .black.opacity(0.04), radius: 8, x: 0, y: 2)
     }
 }
 
-// MARK: - Food Scanner View
+// MARK: - Page 2: Micronutrients View
+extension DashboardView {
+    private var micronutrientsPageView: some View {
+        VStack(spacing: 24) {
+            // Micronutrients Cards
+            HStack(spacing: 12) {
+                // Fiber Card
+                micronutrientCard(
+                    value: "\(fiberEaten)/\(fiberGoal)g",
+                    label: "Fiber eaten",
+                    icon: "leaf.fill",
+                    iconColor: Color(hex: "8B5CF6"),
+                    ringColor: Color(hex: "8B5CF6"),
+                    progress: 0.0
+                )
+                
+                // Sugar Card
+                micronutrientCard(
+                    value: "\(sugarEaten)/\(sugarGoal)g",
+                    label: "Sugar eaten",
+                    icon: "heart.fill",
+                    iconColor: Color(hex: "EC4899"),
+                    ringColor: Color(hex: "EC4899"),
+                    progress: 0.0
+                )
+                
+                // Sodium Card
+                micronutrientCard(
+                    value: "\(sodiumEaten)/\(sodiumGoal)mg",
+                    label: "Sodium eaten",
+                    icon: "drop.fill",
+                    iconColor: Color(hex: "F59E0B"),
+                    ringColor: Color(hex: "F59E0B"),
+                    progress: 0.0
+                )
+            }
+            .padding(.horizontal, 20)
+            
+            // Health Score Section
+            VStack(alignment: .leading, spacing: 16) {
+                HStack {
+                    Text("Health Score")
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundColor(.black)
+                    
+                    Spacer()
+                    
+                    Text("N/A")
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundColor(Color(hex: "8E8E93"))
+                }
+                
+                Text("Track a few foods to generate your health score for today. Your score reflects nutritional content and how processed your meals are.")
+                    .font(.system(size: 17, weight: .regular))
+                    .foregroundColor(Color(hex: "8E8E93"))
+                    .lineSpacing(2)
+            }
+            .padding(24)
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .shadow(color: .black.opacity(0.04), radius: 8, x: 0, y: 2)
+            .padding(.horizontal, 20)
+        }
+    }
+    
+    private func micronutrientCard(value: String, label: String, icon: String, iconColor: Color, ringColor: Color, progress: Double) -> some View {
+        VStack(spacing: 16) {
+            Text(value)
+                .font(.system(size: 24, weight: .semibold))
+                .foregroundColor(.black)
+            
+            Text(label)
+                .font(.system(size: 15, weight: .regular))
+                .foregroundColor(Color(hex: "8E8E93"))
+                .multilineTextAlignment(.center)
+            
+            ZStack {
+                // Background ring
+                Circle()
+                    .stroke(Color(hex: "F2F2F7"), lineWidth: 6)
+                    .frame(width: 60, height: 60)
+                
+                // Progress ring
+                Circle()
+                    .trim(from: 0, to: progress)
+                    .stroke(ringColor, style: StrokeStyle(lineWidth: 6, lineCap: .round))
+                    .frame(width: 60, height: 60)
+                    .rotationEffect(.degrees(-90))
+                
+                // Center icon
+                Image(systemName: icon)
+                    .font(.system(size: 20))
+                    .foregroundColor(iconColor)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(20)
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .shadow(color: .black.opacity(0.04), radius: 8, x: 0, y: 2)
+    }
+}
 
+// MARK: - Page 3: Activity View
+extension DashboardView {
+    private var activityPageView: some View {
+        VStack(spacing: 24) {
+            // Activity Cards Row
+            HStack(spacing: 12) {
+                // Steps Card
+                VStack(spacing: 16) {
+                    HStack(alignment: .bottom, spacing: 0) {
+                        Text("\(String(stepsToday).replacingOccurrences(of: ",", with: ","))")
+                            .font(.system(size: 32, weight: .bold))
+                            .foregroundColor(.black)
+                            .tracking(-0.3)
+                        
+                        Text("/\(String(stepsGoal).replacingOccurrences(of: ",", with: ","))")
+                            .font(.system(size: 16, weight: .regular))
+                            .foregroundColor(Color(hex: "8E8E93"))
+                            .padding(.bottom, 4)
+                    }
+                    
+                    Text("Steps today")
+                        .font(.system(size: 15, weight: .regular))
+                        .foregroundColor(Color(hex: "8E8E93"))
+                    
+                    ZStack {
+                        // Background ring
+                        Circle()
+                            .stroke(Color(hex: "F2F2F7"), lineWidth: 8)
+                            .frame(width: 80, height: 80)
+                        
+                        // Progress ring (about 20% for 2023/10000)
+                        Circle()
+                            .trim(from: 0, to: Double(stepsToday) / Double(stepsGoal))
+                            .stroke(Color.black, style: StrokeStyle(lineWidth: 8, lineCap: .round))
+                            .frame(width: 80, height: 80)
+                            .rotationEffect(.degrees(-90))
+                        
+                        // Center icon
+                        Image(systemName: "figure.walk")
+                            .font(.system(size: 16))
+                            .foregroundColor(.black)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                .padding(20)
+                .background(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .shadow(color: .black.opacity(0.04), radius: 8, x: 0, y: 2)
+                
+                // Calories Burned Card
+                VStack(spacing: 16) {
+                    HStack(spacing: 8) {
+                        Image(systemName: "flame.fill")
+                            .font(.system(size: 20))
+                            .foregroundColor(.black)
+                        
+                        Text("\(caloriesBurnedActivity)")
+                            .font(.system(size: 32, weight: .bold))
+                            .foregroundColor(.black)
+                            .tracking(-0.3)
+                    }
+                    
+                    Text("Calories burned")
+                        .font(.system(size: 15, weight: .regular))
+                        .foregroundColor(Color(hex: "8E8E93"))
+                    
+                    VStack(spacing: 8) {
+                        HStack(spacing: 8) {
+                            Image(systemName: "figure.walk")
+                        .font(.system(size: 16))
+                                .foregroundColor(.black)
+                                .frame(width: 20, height: 20)
+                                .background(Color.white)
+                        .clipShape(Circle())
+                            
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text("Steps")
+                                    .font(.system(size: 12, weight: .medium))
+                                    .foregroundColor(.black)
+                                
+                                Text("+\(caloriesBurnedActivity)")
+                                    .font(.system(size: 12, weight: .regular))
+                                    .foregroundColor(Color(hex: "8E8E93"))
+                            }
+                            
+                            Spacer()
+                        }
+                    }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
+                    .background(Color(hex: "F2F2F7"))
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                }
+                .frame(maxWidth: .infinity)
+                .padding(20)
+                .background(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .shadow(color: .black.opacity(0.04), radius: 8, x: 0, y: 2)
+            }
+            .padding(.horizontal, 20)
+            
+            // Water Section
+                VStack(spacing: 16) {
+                HStack {
+                    HStack(spacing: 12) {
+                        Image(systemName: "drop.fill")
+                            .font(.system(size: 20))
+                            .foregroundColor(Color(hex: "007AFF"))
+                        
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Water")
+                                .font(.system(size: 20, weight: .semibold))
+                                .foregroundColor(.black)
+                            
+                            Text("\(waterOz) fl oz (\(waterCups) cups)")
+                                .font(.system(size: 17, weight: .regular))
+                                .foregroundColor(Color(hex: "8E8E93"))
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    HStack(spacing: 12) {
+                        Button(action: {
+                            // Decrease water
+                        }) {
+                            Image(systemName: "minus")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(.black)
+                                .frame(width: 32, height: 32)
+                                .background(Color(hex: "F2F2F7"))
+                                .clipShape(Circle())
+                        }
+                        
+                        Button(action: {
+                            // Increase water
+                        }) {
+                            Image(systemName: "plus")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(.white)
+                                .frame(width: 32, height: 32)
+                                .background(Color.black)
+                                .clipShape(Circle())
+                        }
+                    }
+                }
+            }
+            .padding(24)
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .shadow(color: .black.opacity(0.04), radius: 8, x: 0, y: 2)
+            .padding(.horizontal, 20)
+        }
+    }
+}
+
+// MARK: - Page Indicator Section
+extension DashboardView {
+    private var pageIndicatorSection: some View {
+        HStack(spacing: 8) {
+            ForEach(0..<3, id: \.self) { index in
+                Circle()
+                    .fill(index == currentPageIndex ? Color.black : Color(hex: "E5E5EA"))
+                    .frame(width: 8, height: 8)
+                    .animation(.easeInOut(duration: 0.3), value: currentPageIndex)
+            }
+        }
+        .padding(.bottom, 32)
+    }
+}
+
+// MARK: - Recently Uploaded Section
+extension DashboardView {
+    private var recentlyUploadedSection: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Text("Recently uploaded")
+                .font(.system(size: 24, weight: .bold))
+                .foregroundColor(.black)
+                .tracking(-0.3)
+                .padding(.horizontal, 20)
+            
+            // Meal Card with Placeholder
+            VStack(spacing: 0) {
+                HStack(spacing: 16) {
+                    // Meal image placeholder
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color(hex: "F2F2F7"))
+                        .frame(width: 60, height: 60)
+                        .overlay(
+                            Image(systemName: "fork.knife")
+                                .font(.system(size: 20))
+                                .foregroundColor(Color(hex: "8E8E93"))
+                        )
+                    
+                    // Meal info placeholder
+                    VStack(alignment: .leading, spacing: 8) {
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(Color(hex: "E5E5EA"))
+                            .frame(height: 16)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        RoundedRectangle(cornerRadius: 7)
+                            .fill(Color(hex: "F2F2F7"))
+                            .frame(height: 14)
+                            .frame(width: 120, alignment: .leading)
+                    }
+                    
+                    Spacer()
+                }
+                .padding(20)
+                
+                // Add meal prompt
+                VStack(spacing: 0) {
+                    Divider()
+                        .background(Color(hex: "F2F2F7"))
+                    
+                    Text("Tap + to add your first meal of the day")
+                        .font(.system(size: 17, weight: .regular))
+                        .foregroundColor(Color(hex: "8E8E93"))
+                        .multilineTextAlignment(.center)
+                        .padding(.vertical, 40)
+                }
+            }
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .shadow(color: .black.opacity(0.04), radius: 8, x: 0, y: 2)
+            .padding(.horizontal, 20)
+        }
+    }
+}
+
+// MARK: - Floating Add Button
+extension DashboardView {
+    private var floatingAddButton: some View {
+        VStack {
+            Spacer()
+            
+            HStack {
+                Spacer()
+                
+                Button(action: {
+                    showingFoodScanner = true
+                }) {
+                    ZStack {
+                        Circle()
+                            .fill(Color.black)
+                            .frame(width: 56, height: 56)
+                            .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 4)
+                        
+                        Text("+")
+                            .font(.system(size: 28, weight: .light))
+                            .foregroundColor(.white)
+                    }
+                }
+                .padding(.trailing, 20)
+                .padding(.bottom, 20)
+            }
+        }
+    }
+}
+
+// MARK: - Supporting Types
+struct DayInfo {
+    let date: Date
+    let dayName: String
+    let dayNumber: Int
+    let isToday: Bool
+    let isSelected: Bool
+}
+
+// MARK: - Food Scanner View (Simplified)
 struct FoodScannerView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var showingImagePicker = false
-    @State private var capturedImage: UIImage?
-    @State private var scanResult: String = ""
-    @State private var isScanning = false
     
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
             
-            VStack(spacing: 0) {
-                // Header
+            VStack {
                 HStack {
                     Button(action: { dismiss() }) {
                         Image(systemName: "xmark")
@@ -473,340 +762,15 @@ struct FoodScannerView: View {
                     }
                 }
                 .padding()
-                .padding(.top, 8)
-                
-                // Camera View Placeholder
-                ZStack {
-                    Rectangle()
-                        .fill(Color.gray.opacity(0.3))
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    
-                    VStack {
-                        Spacer()
-                        
-                        // Square scan frame
-                        Rectangle()
-                            .stroke(Color.white, lineWidth: 2)
-                            .frame(width: 280, height: 280)
-                        
-                        Spacer()
-                    }
-                    
-                    // Instructions
-                    VStack {
-                        Spacer()
-                        
-                        if !isScanning && scanResult.isEmpty {
-                            VStack(spacing: 12) {
-                                Image(systemName: "viewfinder")
-                                    .font(.system(size: 40))
-                                    .foregroundColor(.white.opacity(0.7))
-                                
-                                Text("Point camera at food")
-                                    .font(.system(size: 16, weight: .medium))
-                                    .foregroundColor(.white)
-                            }
-                            .padding(.bottom, 200)
-                        }
-                        
-                        if isScanning {
-                            VStack(spacing: 8) {
-                                ProgressView()
-                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                                    .scaleEffect(1.2)
-                                
-                                Text("Analyzing food...")
-                                    .font(.system(size: 16, weight: .medium))
-                                    .foregroundColor(.white)
-                            }
-                            .padding(.bottom, 200)
-                        }
-                        
-                        Spacer()
-                    }
-                }
-                
-                // Bottom Action Bar
-                HStack(spacing: 0) {
-                    // Gallery button
-                    Button(action: {}) {
-                        VStack(spacing: 8) {
-                            Image(systemName: "photo.on.rectangle")
-                                .font(.system(size: 24))
-                                .foregroundColor(.white.opacity(0.8))
-                            
-                            Text("Gallery")
-                                .font(.system(size: 12))
-                                .foregroundColor(.white.opacity(0.8))
-                        }
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 80)
-                    }
-                    
-                    // Scan button
-                    Button(action: startScanning) {
-                        VStack(spacing: 8) {
-                            ZStack {
-                                Circle()
-                                    .stroke(Color.white, lineWidth: 4)
-                                    .frame(width: 70, height: 70)
-                                
-                                Circle()
-                                    .fill(Color.white)
-                                    .frame(width: 60, height: 60)
-                                
-                                Image(systemName: "camera.fill")
-                                    .font(.system(size: 24))
-                                    .foregroundColor(.black)
-                            }
-                            
-                            Text("Scan Food")
-                                .font(.system(size: 12, weight: .medium))
-                                .foregroundColor(.white)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 100)
-                    }
-                    .disabled(isScanning)
-                    
-                    // Manual entry button
-                    Button(action: {}) {
-                        VStack(spacing: 8) {
-                            Image(systemName: "square.and.pencil")
-                                .font(.system(size: 24))
-                                .foregroundColor(.white.opacity(0.8))
-                            
-                            Text("Manual")
-                                .font(.system(size: 12))
-                                .foregroundColor(.white.opacity(0.8))
-                        }
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 80)
-                    }
-                }
-                .padding(.horizontal)
-                .padding(.bottom)
-            }
-        }
-    }
-    
-    private func startScanning() {
-        isScanning = true
-        
-        // Simulate scanning process
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-            isScanning = false
-            // Simulate scan result
-            let foods = ["Turkey Sandwich", "Grilled Chicken Salad", "Banana", "Greek Yogurt"]
-            scanResult = foods.randomElement() ?? "Unknown Food"
-        }
-    }
-}
-
-// MARK: - Plan Summary View
-
-struct PlanSummaryView: View {
-    var body: some View {
-        ScrollView {
-            VStack(spacing: 32) {
-                VStack(spacing: 16) {
-                    Text("Congratulations your custom plan is ready!")
-                        .font(.system(size: 28, weight: .bold))
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
-                    
-                    Text("You should lose: Lose 12 lbs by December 26")
-                        .font(.system(size: 18, weight: .medium))
-                        .foregroundColor(.blue)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
-                }
-                .padding(.top, 20)
-                
-                // Daily Recommendation Cards
-                VStack(spacing: 16) {
-                    Text("Daily Recommendations")
-                        .font(.system(size: 20, weight: .semibold))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal)
-                    
-                    LazyVGrid(columns: [
-                        GridItem(.flexible()),
-                        GridItem(.flexible())
-                    ], spacing: 16) {
-                        RecommendationCard(title: "Calories", value: "2000", unit: "cal", icon: "flame.fill", color: .orange)
-                        RecommendationCard(title: "Carbs", value: "250", unit: "g", icon: "square.fill", color: .yellow)
-                        RecommendationCard(title: "Protein", value: "150", unit: "g", icon: "leaf.fill", color: .red)
-                        RecommendationCard(title: "Fats", value: "67", unit: "g", icon: "drop.fill", color: .purple)
-                    }
-                    .padding(.horizontal)
-                }
-                
-                Spacer(minLength: 100)
-            }
-            .padding(.vertical)
-        }
-        .navigationTitle("Your Plan")
-        .navigationBarTitleDisplayMode(.large)
-    }
-}
-
-struct RecommendationCard: View {
-    let title: String
-    let value: String
-    let unit: String
-    let icon: String
-    let color: Color
-    
-    var body: some View {
-        VStack(spacing: 16) {
-            HStack {
-                Image(systemName: icon)
-                    .font(.system(size: 24))
-                    .foregroundColor(color)
                 
                 Spacer()
                 
-                Button(action: {}) {
-                    Image(systemName: "pencil")
-                        .font(.system(size: 14))
-                        .foregroundColor(.secondary)
-                }
-            }
-            
-            VStack(spacing: 4) {
-                HStack(alignment: .bottom, spacing: 2) {
-                    Text(value)
-                        .font(.system(size: 32, weight: .bold))
-                        .foregroundColor(.primary)
-                    
-                    Text(unit)
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(.secondary)
-                        .padding(.bottom, 4)
-                }
+                Text("Camera functionality would go here")
+                    .foregroundColor(.white)
                 
-                Text(title)
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(.secondary)
-            }
-        }
-        .padding(20)
-        .background(Color(.systemGray6))
-        .cornerRadius(16)
-    }
-}
-
-// MARK: - Gamification Summary Card
-
-struct GamificationSummaryCard: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    @StateObject private var gamificationService: GamificationService
-    
-    init() {
-        // This will be properly initialized in the body
-        self._gamificationService = StateObject(wrappedValue: GamificationService(context: PersistenceController.shared.container.viewContext))
-    }
-    
-    var body: some View {
-        VStack(spacing: 12) {
-            HStack {
-                Text("Today's Progress")
-                    .font(.headline)
-                    .fontWeight(.semibold)
                 Spacer()
             }
-            
-            HStack(spacing: 16) {
-                // Streak
-                VStack(spacing: 4) {
-                    HStack(spacing: 4) {
-                        Text("🔥")
-                            .font(.title2)
-                        Text("\(gamificationService.currentStreak)")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundColor(.orange)
-                    }
-                    Text("Day Streak")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-                .frame(maxWidth: .infinity)
-                
-                Divider()
-                    .frame(height: 30)
-                
-                // Points
-                VStack(spacing: 4) {
-                    HStack(spacing: 4) {
-                        Text("⭐")
-                            .font(.title2)
-                        Text("\(gamificationService.totalPoints)")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundColor(.blue)
-                    }
-                    Text("Total Points")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-                .frame(maxWidth: .infinity)
-                
-                Divider()
-                    .frame(height: 30)
-                
-                // Level
-                VStack(spacing: 4) {
-                    HStack(spacing: 4) {
-                        Text("👑")
-                            .font(.title2)
-                        Text("L\(gamificationService.currentLevel)")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundColor(.purple)
-                    }
-                    Text("Level")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-                .frame(maxWidth: .infinity)
-            }
-            
-            // Today's Challenge (if exists)
-            if let challenge = gamificationService.todaysChallenge {
-                Divider()
-                
-                VStack(alignment: .leading, spacing: 6) {
-                    HStack {
-                        Text("Today's Challenge")
-                            .font(.subheadline)
-                            .fontWeight(.medium)
-                        Spacer()
-                        if challenge.isCompleted {
-                            Image(systemName: "checkmark.circle.fill")
-                                .foregroundColor(.green)
-                        }
-                    }
-                    
-                    Text(challenge.title ?? "Challenge")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                    
-                    if !challenge.isCompleted {
-                        let progress = min(challenge.currentValue / challenge.targetValue, 1.0)
-                        ProgressView(value: progress)
-                            .progressViewStyle(LinearProgressViewStyle(tint: .blue))
-                            .scaleEffect(y: 0.8)
-                    }
-                }
-            }
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(Color(.systemGray6))
-        )
     }
 }
 
